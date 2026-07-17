@@ -13,7 +13,7 @@ public class ReviewController : ControllerBase
     public ReviewController(DatabaseService databaseService)
     {
         _databaseService = databaseService;
-    }//
+    }
 
     [HttpGet]
     public IActionResult Get()
