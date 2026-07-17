@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="backend/ReviewFlow.Api/ReviewFlow.Api/ReviewFlow.Api.csproj" />
+  <Project Path="Client/ReviewFlow.MAUI/ReviewFlow.MAUI.csproj" />
+</Solution>
