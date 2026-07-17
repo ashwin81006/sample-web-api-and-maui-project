@@ -8,7 +8,7 @@ public class ApiService
 #if WINDOWS
     private const string BaseUrl = "http://localhost:5110/api/";
 #else
-    private const string BaseUrl = "https://blog-hunt-pioneer-bonus.trycloudflare.com/api/";
+    private const string BaseUrl = "https://hughes-liability-speeches-browsers.trycloudflare.com/api/"; //type ipconfig in your laptop and use the ipv4 address of your laptop in place of localhost
 #endif
 
     private readonly HttpClient _httpClient = new();
