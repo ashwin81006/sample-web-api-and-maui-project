@@ -74,7 +74,7 @@ public class DatabaseService
                          FacultyName=@FacultyName,
                          ProjectTitle=@ProjectTitle,
                          Status=@Status
-                     WHERE id=@Id";
+                     WHERE Id=@Id";
 
         using var command = new NpgsqlCommand(query, connection);
 
@@ -93,7 +93,7 @@ public class DatabaseService
 
         connection.Open();
 
-        string query = "DELETE FROM ReviewRequests WHERE id=@Id";
+        string query = "DELETE FROM ReviewRequests WHERE \"Id\" = @Id";
 
         using var command = new NpgsqlCommand(query, connection);
 
@@ -108,7 +108,7 @@ public class DatabaseService
 
         connection.Open();
 
-        string query = "SELECT * FROM ReviewRequests WHERE id=@Id";
+        string query = "SELECT * FROM ReviewRequests WHERE \"Id\"=@Id";
 
         using var command = new NpgsqlCommand(query, connection);
         command.Parameters.AddWithValue("@Id", id);
