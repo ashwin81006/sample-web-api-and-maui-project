@@ -74,7 +74,7 @@ public class DatabaseService
                          FacultyName=@FacultyName,
                          ProjectTitle=@ProjectTitle,
                          Status=@Status
-                     WHERE Id=@Id";
+                     WHERE ""Id""=@Id";
 
         using var command = new NpgsqlCommand(query, connection);
 
