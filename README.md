@@ -1,32 +1,70 @@
 # ReviewFlow Prototype
 
-ReviewFlow is a full-stack review management system built for educational institutions.
+ReviewFlow is a full-stack academic review management system designed to simplify project reviews, assignment evaluations, and faculty consultations within educational institutions.
 
-The project consists of:
+The system consists of a centralized REST API, a React web application, a .NET MAUI mobile/desktop application, and a PostgreSQL database.
 
-- **Backend:** ASP.NET Core Web API (.NET 10)
-- **Database:** PostgreSQL
-- **Web Frontend:** React
-- **Mobile/Desktop App:** .NET MAUI
-- **API Documentation:** Swagger
+---
+
+# Technology Stack
+
+| Layer | Technology |
+|--------|------------|
+| Backend | ASP.NET Core Web API (.NET 10) |
+| Database | PostgreSQL 17 |
+| Web Frontend | React + Vite |
+| Mobile/Desktop | .NET MAUI |
+| ORM | Entity Framework Core |
+| API Documentation | Swagger (OpenAPI) |
+| Version Control | Git & GitHub |
 
 ---
 
 # Project Structure
 
-```
+```text
 ReviewFlowPrototype
 │
-├── backend          -> ASP.NET Core Web API
-├── frontend         -> React Web Application
-├── Client           -> .NET MAUI Mobile/Desktop App
-├── database         -> SQL Scripts
+├── backend/
+│   └── ReviewFlow.Api
+│
+├── frontend/
+│   └── React Application
+│
+├── Client/
+│   └── ReviewFlow.MAUI
+│
+├── database/
+│   ├── schema.sql
+│   └── sample_data.sql
+│
+├── .gitignore
+├── README.md
 └── ReviewFlow.sln
 ```
 
 ---
 
-# Software Required
+# Architecture
+
+```text
+                 PostgreSQL
+                      ▲
+                      │
+            ASP.NET Core Web API
+             (Business Logic Layer)
+               ▲               ▲
+               │               │
+        React Web        .NET MAUI App
+```
+
+The frontend applications communicate only with the Web API.
+
+The Web API performs all business logic and communicates with PostgreSQL.
+
+---
+
+# Software Requirements
 
 Install the following software before opening the project.
 
@@ -36,13 +74,11 @@ Download:
 
 https://visualstudio.microsoft.com/
 
-During installation, select these workloads:
+Install the following workloads:
 
 - ASP.NET and web development
 - .NET Multi-platform App UI (MAUI)
 - Desktop development with .NET
-
-These workloads install everything required for the backend and MAUI application.
 
 ---
 
@@ -54,11 +90,11 @@ https://dotnet.microsoft.com/download
 
 Verify installation:
 
-```cmd
+```bash
 dotnet --version
 ```
 
-You should see something similar to:
+Expected output:
 
 ```
 10.x.x
@@ -74,16 +110,12 @@ https://www.postgresql.org/download/windows/
 
 During installation:
 
-Remember the password you set for the **postgres** user.
-
-Example:
-
 ```
 Username : postgres
-Password : your_password
+Password : YOUR_PASSWORD
 ```
 
-Install pgAdmin when prompted.
+Install **pgAdmin** when prompted.
 
 ---
 
@@ -95,7 +127,7 @@ https://nodejs.org/
 
 Verify installation:
 
-```cmd
+```bash
 node -v
 npm -v
 ```
@@ -104,15 +136,8 @@ npm -v
 
 # Clone the Repository
 
-Open Command Prompt.
-
-```
-https://github.com/ashwin81006/sample-web-api-and-maui-project.git
-```
-
-Move into the project.
-
-```
+```bash
+git clone https://github.com/ashwin81006/sample-web-api-and-maui-project.git
 cd sample-web-api-and-maui-project
 ```
 
@@ -122,22 +147,19 @@ cd sample-web-api-and-maui-project
 
 Open **pgAdmin**.
 
-Create a new database named
+Create a database named
 
 ```
 ReviewFlowDB
 ```
 
-Open
+Execute
 
 ```
 database/schema.sql
 ```
 
-Execute the script.
-
-This creates all required tables.
-
+---
 
 # Configure the Backend
 
@@ -147,7 +169,7 @@ Navigate to
 backend/ReviewFlow.Api
 ```
 
-Rename 
+Rename
 
 ```
 appsettings.example.json
@@ -159,7 +181,7 @@ to
 appsettings.json
 ```
 
-Update the connection string.
+Update the PostgreSQL connection string.
 
 Example:
 
@@ -175,35 +197,16 @@ Example:
 
 # Restore NuGet Packages
 
-Open
-
-```
-ReviewFlow.sln
-```
-
-Visual Studio automatically restores packages.
-
-If required:
-
-```
+```bash
 dotnet restore
 ```
 
 ---
 
-# Install React Packages
+# Install Frontend Packages
 
-Open Terminal.
-
-Navigate to the frontend folder.
-
-```
+```bash
 cd frontend
-```
-
-Install dependencies.
-
-```
 npm install
 ```
 
@@ -211,7 +214,11 @@ npm install
 
 # Running the Backend
 
-In Visual Studio:
+Open
+
+```
+ReviewFlow.sln
+```
 
 Set
 
@@ -221,10 +228,16 @@ ReviewFlow.Api
 
 as the Startup Project.
 
-Press
+Run
 
 ```
 F5
+```
+
+or
+
+```bash
+dotnet run
 ```
 
 Swagger should open at
@@ -233,29 +246,18 @@ Swagger should open at
 http://localhost:5110/swagger
 ```
 
-If Swagger opens successfully, the backend is running correctly.
-
 ---
 
 # Running the React Application
 
-Open Terminal.
-
-Navigate to
-
-```
-frontend
-```
-
-Run
-
-```
+```bash
+cd frontend
 npm run dev
 ```
 
 Open the URL shown in the terminal.
 
-Usually:
+Usually
 
 ```
 http://localhost:5173
@@ -265,9 +267,13 @@ http://localhost:5173
 
 # Running the MAUI Application
 
-Open the solution.
+Open
 
-Select one of the following targets:
+```
+ReviewFlow.sln
+```
+
+Choose one of the following targets:
 
 - Windows Machine
 - Android Emulator
@@ -281,22 +287,35 @@ F5
 
 ---
 
-# Project Workflow
+# Development Workflow
 
+```text
+Edit Code
+     │
+Build
+     │
+Run Backend
+     │
+Test Using Swagger
+     │
+Run React / MAUI
+     │
+Commit Changes
+     │
+Push to GitHub
 ```
-                PostgreSQL
-                     │
-                     ▼
-          ASP.NET Core Web API
-                     │
-        ┌────────────┴────────────┐
-        ▼                         ▼
-   React Frontend          MAUI Application
-```
 
-The frontend and mobile application communicate only with the Web API.
+---
 
-The Web API communicates with PostgreSQL.
+# API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/review` | Get all reviews |
+| GET | `/api/review/{id}` | Get a review |
+| POST | `/api/review` | Create a review |
+| PUT | `/api/review/{id}` | Update a review |
+| DELETE | `/api/review/{id}` | Delete a review |
 
 ---
 
@@ -304,31 +323,31 @@ The Web API communicates with PostgreSQL.
 
 Restore packages
 
-```
+```bash
 dotnet restore
 ```
 
-Build solution
+Build
 
-```
+```bash
 dotnet build
 ```
 
 Run backend
 
-```
+```bash
 dotnet run
 ```
 
 Install frontend packages
 
-```
+```bash
 npm install
 ```
 
 Run frontend
 
-```
+```bash
 npm run dev
 ```
 
@@ -338,41 +357,41 @@ npm run dev
 
 ## PostgreSQL Connection Failed
 
-- Verify PostgreSQL service is running.
-- Verify the password in `appsettings.json`.
-- Verify the database `ReviewFlowDB` exists.
+- Ensure PostgreSQL is running.
+- Verify the connection string.
+- Ensure `ReviewFlowDB` exists.
 
 ---
 
-## React Cannot Reach API
+## Swagger Not Opening
 
-Check that the backend is running.
-
-Open:
+Open
 
 ```
 http://localhost:5110/swagger
 ```
 
-If Swagger loads, the API is working.
+If Swagger loads, the backend is working correctly.
 
 ---
 
-## NuGet Packages Missing
+## React Cannot Connect to API
 
-Run:
+Ensure the backend is running before starting the React application.
 
-```
+---
+
+## Missing NuGet Packages
+
+```bash
 dotnet restore
 ```
 
 ---
 
-## npm Packages Missing
+## Missing npm Packages
 
-Run:
-
-```
+```bash
 npm install
 ```
 
@@ -380,7 +399,7 @@ npm install
 
 ## Android Emulator Not Found
 
-Open Visual Studio Installer.
+Open **Visual Studio Installer**.
 
 Modify Visual Studio.
 
@@ -388,11 +407,46 @@ Ensure the **.NET MAUI** workload is installed.
 
 ---
 
-# Contributors
+# Production Deployment (Planned)
 
-- Backend API
-- Database
-- React Frontend
-- MAUI Application
+The application is designed to be deployed on a Debian Linux server using:
+
+- PostgreSQL
+- ASP.NET Core Runtime
+- Nginx
+- Cloudflare Named Tunnel
+- systemd
+- OpenSSH
+
+Deployment Architecture
+
+```text
+Internet
+     │
+Cloudflare Tunnel
+     │
+Nginx
+     │
+ASP.NET Core API
+     │
+PostgreSQL
+```
+
+This architecture allows multiple ASP.NET Core APIs to run independently on the same server while sharing a single PostgreSQL installation.
 
 ---
+
+# Contributors
+
+| Component | Contributor |
+|-----------|-------------|
+| Backend API | |
+| Database | |
+| React Frontend | |
+| .NET MAUI Application | |
+
+---
+
+## License
+
+This project is intended for educational and academic purposes.
