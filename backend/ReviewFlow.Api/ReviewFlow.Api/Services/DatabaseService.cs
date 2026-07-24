@@ -129,4 +129,35 @@ public class DatabaseService
 
         return null;
     }
+
+    public ReviewRequest? GetByName(string s)
+    {
+        using var connection = new NpgsqlConnection(_connectionString);
+
+        connection.Open();
+
+        string query = @"SELECT * 
+                     FROM ReviewRequests
+                     WHERE ""studentname"" = @StudentName";
+
+        using var command = new NpgsqlCommand(query, connection);
+
+        command.Parameters.AddWithValue("@StudentName", s);
+
+        using var reader = command.ExecuteReader();
+
+        if (reader.Read())
+        {
+            return new ReviewRequest
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                StudentName = reader["StudentName"].ToString()!,
+                FacultyName = reader["FacultyName"].ToString()!,
+                ProjectTitle = reader["ProjectTitle"].ToString()!,
+                Status = reader["Status"].ToString()!
+            };
+        }
+
+        return null;
+    }
 }

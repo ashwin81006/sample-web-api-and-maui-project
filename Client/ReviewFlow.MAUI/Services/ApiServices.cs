@@ -6,7 +6,7 @@ namespace ReviewFlow.MAUI.Services;
 public class ApiService
 {
 
-    private const string BaseUrl = "https://external-bargains-tsunami-nick.trycloudflare.com/api/"; //type ipconfig in your laptop and use the ipv4 address of your laptop in place of localhost
+    private const string BaseUrl = "https://driver-discuss-varies-sentences.trycloudflare.com/api/"; //type ipconfig in your laptop and use the ipv4 address of your laptop in place of localhost
 
     private readonly HttpClient _httpClient = new();
 

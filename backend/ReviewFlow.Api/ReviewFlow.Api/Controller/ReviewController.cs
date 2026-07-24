@@ -45,10 +45,21 @@ public class ReviewController : ControllerBase
         return Ok("Deleted Successfully");
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public IActionResult GetId(int id)
     {
         var review = _databaseService.GetReviewById(id);
+
+        if (review == null)
+            return NotFound();
+
+        return Ok(review);
+    }
+
+    [HttpGet("name/{name}")]
+    public IActionResult GetName(String name)
+    {
+        var review = _databaseService.GetByName(name);
 
         if (review == null)
             return NotFound();
